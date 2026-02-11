@@ -1,0 +1,8 @@
+{"example_id":"0","question":"Alice has 2 apples and buys 3 more. How many apples does she have?","answer":"Alice has 5 apples.\n#### 5"}
+{"example_id":"1","question":"Tom read 7 pages on Monday and 8 pages on Tuesday. How many pages total?","answer":"He read 15 pages.\n#### 15"}
+{"example_id":"2","question":"A box has 12 candies and you eat 4. How many are left?","answer":"There are 8 candies left.\n#### 8"}
+{"example_id":"3","question":"A train travels 30 miles each hour for 4 hours. How far?","answer":"Distance is 120 miles.\n#### 120"}
+{"example_id":"4","question":"There are 9 birds, 2 fly away. How many remain?","answer":"7 birds remain.\n#### 7"}
+{"example_id":"5","question":"A baker made 6 pies in the morning and 5 in the evening. Total pies?","answer":"Total is 11.\n#### 11"}
+{"example_id":"6","question":"You save $20 each week for 3 weeks. How much saved?","answer":"Saved amount is 60 dollars.\n#### 60"}
+{"example_id":"7","question":"A team scored 14 points in half one and 10 in half two. Total?","answer":"They scored 24 points.\n#### 24"}

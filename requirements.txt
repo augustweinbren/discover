@@ -1,0 +1,10 @@
+# Core runtime
+pyyaml
+
+datasets
+
+# Local mlx-lm checkout with training extras (LoRA/tuner utilities)
+-e ./mlx-lm[training]
+
+# Test tooling
+pytest
