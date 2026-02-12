@@ -4,6 +4,7 @@ import math
 import random
 import time
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Optional
 
 from gsm8k_env import GSM8KExample
@@ -91,6 +92,13 @@ class StubLLM:
         self._skill[example_id] += lr * signal * 4.0
         self._global_shift += lr * signal * 0.4
         self._version += 1
+
+    def save_checkpoint(self, output_dir: str, tag: str) -> str:
+        out = Path(output_dir)
+        out.mkdir(parents=True, exist_ok=True)
+        path = out / f"{tag}.stub.txt"
+        path.write_text(f"stub_version={self._version}\n", encoding="utf-8")
+        return str(path)
 
 
 class MlxBackend:
@@ -356,6 +364,18 @@ class MlxBackend:
                 f"new_version={self._version}",
                 flush=True,
             )
+
+    def save_checkpoint(self, output_dir: str, tag: str) -> str:
+        from mlx.utils import tree_flatten
+
+        out = Path(output_dir)
+        out.mkdir(parents=True, exist_ok=True)
+        ckpt_path = out / f"{tag}_adapters.safetensors"
+        adapter_weights = dict(tree_flatten(self.model.trainable_parameters()))
+        self.mx.save_safetensors(str(ckpt_path), adapter_weights)
+        if self._debug:
+            print(f"[DEBUG] mlx checkpoint saved: {ckpt_path}", flush=True)
+        return str(ckpt_path)
 
 
 def create_backend(

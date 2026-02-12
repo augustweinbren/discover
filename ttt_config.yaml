@@ -14,10 +14,10 @@ debug: false
 # -----------------------------
 data:
   split: test
-  max_examples: 64
-  # max_examples: 100
-  local_cache_path: tests/fixtures/gsm8k_tiny.jsonl
-  # local_cache_path: null
+  # max_examples: 64
+  max_examples: 1319
+  # local_cache_path: tests/fixtures/gsm8k_tiny.jsonl
+  local_cache_path: null
 
 sampling:
   temperature: 1.0
@@ -27,10 +27,10 @@ sampling:
   seed: 0
 
 grouping:
-  # G: 8
-  G: 2
-  #B: 64
-  B: 8
+  G: 8
+  #G: 2
+  B: 64
+  #B: 8
 
 reuse:
   c: 1.0
@@ -59,10 +59,14 @@ train:
   init_rollouts_per_example: 2
 
 benchmark:
-  after_hotswap: false
+  after_hotswap: true
   max_examples: 64
   temperature: 0.0
   max_new_tokens: 256
+
+checkpoint:
+  after_outer_step: true
+  dir: checkpoints
 
 # ---------------------------------------------
 # Reference parity block from mlx-lm LoRA config

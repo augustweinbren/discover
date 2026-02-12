@@ -76,6 +76,8 @@ class TrainConfig:
     benchmark_max_examples: int = 64
     benchmark_temperature: float = 0.0
     benchmark_max_new_tokens: int = 256
+    checkpoint_after_outer_step: bool = False
+    checkpoint_dir: str = "checkpoints"
 
 
 @dataclass
@@ -343,6 +345,10 @@ def run_training(config: TrainConfig) -> TrainResult:
             f"Outer step {step} done. best_acc={metric.best_accuracy_so_far:.4f} "
             f"rolling_acc={metric.rolling_accuracy:.4f} kl={metric.kl_magnitude:.6f}"
         )
+        if config.checkpoint_after_outer_step:
+            ckpt_tag = f"step_{step:04d}"
+            ckpt_path = backend.save_checkpoint(config.checkpoint_dir, ckpt_tag)
+            dlog(f"Checkpoint saved for outer step {step}: {ckpt_path}")
 
     dlog("Running best-of-N baseline evaluation...")
     baseline = _evaluate_best_of_n_baseline(config, examples)

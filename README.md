@@ -113,6 +113,22 @@ New benchmark flags:
 - `--benchmark_temperature <float>`
 - `--benchmark_max_new_tokens <int>`
 
+## Save Checkpoints Each Outer Step
+Enable outer-step adapter checkpointing:
+
+```bash
+python scripts/run_gsm8k.py \
+  --config ttt_config.yaml \
+  --backend mlx \
+  --checkpoint_after_outer_step true \
+  --checkpoint_dir checkpoints
+```
+
+This saves LoRA adapter weights as:
+- `checkpoints/step_0000_adapters.safetensors`
+- `checkpoints/step_0001_adapters.safetensors`
+- ...
+
 ## Metrics You Will See
 Each step prints JSON with fields like:
 - `best_accuracy_so_far`: fraction of examples solved at least once in history
